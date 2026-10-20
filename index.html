@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>GMG – Outlook megnyitása</title>
+<style>
+body{margin:0;background:#101b2b;color:#edf4ff;font:17px/1.6 system-ui,sans-serif;display:grid;min-height:100vh;place-items:center}main{max-width:480px;padding:28px}a{display:block;background:#1684df;color:white;text-align:center;padding:15px;border-radius:12px;text-decoration:none;margin:20px 0}small{color:#bccbe0}#status{padding:12px;border:1px solid #49607c;border-radius:9px}
+</style>
+</head>
+<body>
+<main>
+<h1>Outlook megnyitása</h1>
+<p id="status" role="status">Megpróbáljuk elindítani az Outlook alkalmazást…</p>
+<a id="open" href="ms-outlook://">Outlook alkalmazás megnyitása</a>
+<p>Ha nem történik semmi, koppints a fenti gombra, és engedélyezd az alkalmazás megnyitását, ha a telefon rákérdez.</p>
+<p>Telegramban elakadt? A böngésző menüjéből válaszd a megnyitást Safariban, majd koppints újra a gombra. A menü neve verziónként eltérhet.</p>
+<small>Ez tesztoldal: az Outlookot indítja, nem egy adott levelet. Nincs rajta bot-token vagy levéltartalom. Ha az Outlook nincs telepítve, a link nem indít alkalmazást.</small>
+</main>
+<script>
+const statusBox=document.getElementById('status');
+let timer=setTimeout(()=>{timer=null;if(document.visibilityState==='visible'){statusBox.textContent='Ha az Outlook nem nyílt meg, használd az alábbi gombot.';window.location.href='ms-outlook://';}},800);
+document.getElementById('open').addEventListener('click',()=>{if(timer){clearTimeout(timer);timer=null;}statusBox.textContent='Az alkalmazás megnyitását kérted. A képernyőváltás nem ellenőrizhető biztosan erről az oldalról.';});
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&timer){clearTimeout(timer);timer=null;}});
+</script>
+</body>
+</html>
